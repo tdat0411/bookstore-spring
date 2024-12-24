@@ -38,7 +38,7 @@
 
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label">Phone:</label>
-                                    <form:input type="text" class="form-control" path="Phone" />
+                                    <form:input type="text" class="form-control" path="phone" />
                                 </div>
 
                                 <div class="mb-3 col-12 col-md-6">
