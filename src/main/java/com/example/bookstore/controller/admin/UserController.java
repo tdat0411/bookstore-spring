@@ -1,22 +1,18 @@
 package com.example.bookstore.controller.admin;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.bookstore.domain.User;
 import com.example.bookstore.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserController {
@@ -64,6 +60,24 @@ public class UserController {
     @PostMapping("/admin/user/delete")
     public String postDeleteUserPage(Model model, @ModelAttribute("newUser") User user) {
         this.userService.deleteUser(user.getId());
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable Long id) {
+        User user = this.userService.getUserById(id).get();
+        model.addAttribute("newUser", user);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUserPage(Model model, @ModelAttribute("newUser") User user) {
+        User currentUser = this.userService.getUserById(user.getId()).get();
+        if (currentUser != null) {
+            currentUser.setUserName(user.getUserName());
+            currentUser.setPhone(user.getPhone());
+            this.userService.handleSaveUser(currentUser);
+        }
         return "redirect:/admin/user";
     }
 
