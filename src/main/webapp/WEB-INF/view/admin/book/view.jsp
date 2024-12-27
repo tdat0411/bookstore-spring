@@ -23,18 +23,19 @@
                                 <h3>Book detail with id = ${id}</h3>
                             </div>
                             <hr>
-                            <div class="card" style="width: 60%">
+                            <div class="card" style="width: 40%">
                                 <img class="card-img-top" src="/images/book/${book.image}" alt="Card image cap">
                                 <div class="card-header">
-                                    Product information
+                                    Book information
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${product.id}</li>
-                                    <li class="list-group-item">Name: ${product.name}</li>
-                                    <li class="list-group-item">Price: ${product.price}</li>
+                                    <li class="list-group-item">ID: ${book.id}</li>
+                                    <li class="list-group-item">Name: ${book.name}</li>
+                                    <li class="list-group-item">Price: ${book.price}</li>
+                                    <li class="list-group-item">Category: ${book.category}</li>
                                 </ul>
                             </div>
-                            <a href="/admin/product" class="btn btn-success mt-3">Back</a>
+                            <a href="/admin/book" class="btn btn-success mt-3">Back</a>
                         </div>
                     </div>
                 </div>

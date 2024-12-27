@@ -36,6 +36,9 @@
                                         <button class="btn btn-danger">Confirm</button>
                                     </form:form>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                 </main>
             </body>
 

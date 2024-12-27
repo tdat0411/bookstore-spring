@@ -21,27 +21,27 @@
                             <h3>Create a user</h3>
                             <hr>
                             <form:form method="post" action="/admin/user/create" modelAttribute="newUser" class="row">
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12">
                                     <label class="form-label">Name:</label>
                                     <form:input type="text" class="form-control" path="userName" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12">
                                     <label class="form-label">Email:</label>
                                     <form:input type="email" class="form-control" path="email" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12">
                                     <label class="form-label">PassWord:</label>
                                     <form:input type="password" class="form-control" path="password" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12">
                                     <label class="form-label">Phone:</label>
                                     <form:input type="text" class="form-control" path="phone" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12">
                                     <label class="form-label">Role:</label>
                                     <form:select class="form-select" path="role.name">
                                         <form:option value="ADMIN">ADMIN</form:option>

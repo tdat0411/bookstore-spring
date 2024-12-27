@@ -23,4 +23,12 @@ public class BookService {
     public Optional<Book> getBookById(Long id) {
         return this.bookRepository.findById(id);
     }
+
+    public Book createBook(Book book) {
+        return this.bookRepository.save(book);
+    }
+
+    public void deleteBook(long id) {
+        this.bookRepository.deleteById(id);
+    }
 }

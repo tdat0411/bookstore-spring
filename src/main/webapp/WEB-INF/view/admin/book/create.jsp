@@ -24,41 +24,42 @@
                                 enctype="multipart/form-data">
                                 <!-- matching controller với view newBook -->
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12 ">
                                     <label class="form-label">Name:</label>
                                     <form:input type="text" class="form-control" path="name" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12 ">
                                     <label class="form-label">Price:</label>
                                     <form:input type="number" class="form-control" path="price" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12 ">
                                     <label class="form-label">Quantity:</label>
                                     <form:input type="number" class="form-control" path="quantity" />
                                 </div>
 
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12 ">
                                     <label class="form-label">Category:</label>
                                     <form:select class="form-select" path="category">
-                                        <form:option value="">APPLE(MacBook)</form:option>
-                                        <form:option value="DELL">Dell</form:option>
-                                        <form:option value="ACER">Acer</form:option>
-                                        <form:option value="LG">LG</form:option>
-                                        <form:option value="ASUS">Asus</form:option>
-                                        <form:option value="LENOVO">Lenovo</form:option>
+                                        <form:option value="Sách ngoại ngữ">Sách ngoại ngữ</form:option>
+                                        <form:option value="Sách IT">Sách IT</form:option>
+                                        <form:option value="Sách chuyên ngành">Sách chuyên ngành</form:option>
+                                        <form:option value="Sách luyện thi">Sách luyện thi</form:option>
+                                        <form:option value="Sách tiếng Hàn">Sách tiếng Hàn</form:option>
+                                        <form:option value="Sách tiếng Trung">Sách tiếng Trung</form:option>
+                                        <form:option value="Sách tiếng Nhật">Sách tiếng Nhật</form:option>
                                     </form:select>
                                 </div>
-                                <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3 col-12 ">
                                     <label for="avatarFile" class="form-label">Image:</label>
                                     <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg"
-                                        name="tiendatFile">
+                                        name="datFile">
                                 </div>
-                                <div class="col-12 mb-3">
+                                <!-- <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
                                         id="avatarPreview">
-                                </div>
+                                </div> -->
                                 <div class="col-12 mb-5">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                 </div>
