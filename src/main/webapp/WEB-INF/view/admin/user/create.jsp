@@ -22,18 +22,35 @@
                             <hr>
                             <form:form method="post" action="/admin/user/create" modelAttribute="newUser" class="row">
                                 <div class="mb-3 col-12">
+                                    <c:set var="errorName">
+                                        <form:errors path="userName" cssClass="invalid-feedback" />
+                                    </c:set>
                                     <label class="form-label">Name:</label>
-                                    <form:input type="text" class="form-control" path="userName" />
+                                    <form:input type="text"
+                                        class="form-control ${not empty errorName ? 'is-invalid' : ''}"
+                                        path="userName" />
+                                    ${errorName}
                                 </div>
 
                                 <div class="mb-3 col-12">
+                                    <c:set var="errorEmail">
+                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                    </c:set>
                                     <label class="form-label">Email:</label>
-                                    <form:input type="email" class="form-control" path="email" />
+                                    <form:input type="email"
+                                        class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" path="email" />
+                                    ${errorEmail}
                                 </div>
 
                                 <div class="mb-3 col-12">
+                                    <c:set var="errorPassword">
+                                        <form:errors path="password" cssClass="invalid-feedback" />
+                                    </c:set>
                                     <label class="form-label">PassWord:</label>
-                                    <form:input type="password" class="form-control" path="password" />
+                                    <form:input type="password"
+                                        class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
+                                        path="password" />
+                                    ${errorPassword}
                                 </div>
 
                                 <div class="mb-3 col-12">
