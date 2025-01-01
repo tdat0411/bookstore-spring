@@ -88,6 +88,7 @@ public class BookController {
         if (currentBook != null) {
             currentBook.setPrice(book.getPrice());
             currentBook.setQuantity(book.getQuantity());
+            currentBook.setCategory(book.getCategory());
             this.bookService.createBook(currentBook);
         }
         return "redirect:/admin/book";

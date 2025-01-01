@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+table {
+    margin-top: 15px;
+}
+
+.table thead th {
+    text-align: center;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.text-center {
+    font-style: italic;
+    color: gray;
+}

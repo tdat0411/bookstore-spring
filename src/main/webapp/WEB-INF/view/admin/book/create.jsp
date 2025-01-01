@@ -44,7 +44,6 @@
                                     <form:select class="form-select" path="category">
                                         <form:option value="Sách ngoại ngữ">Sách ngoại ngữ</form:option>
                                         <form:option value="Sách IT">Sách IT</form:option>
-                                        <form:option value="Sách chuyên ngành">Sách chuyên ngành</form:option>
                                         <form:option value="Sách luyện thi">Sách luyện thi</form:option>
                                         <form:option value="Sách tiếng Hàn">Sách tiếng Hàn</form:option>
                                         <form:option value="Sách tiếng Trung">Sách tiếng Trung</form:option>
@@ -53,8 +52,8 @@
                                 </div>
                                 <div class="mb-3 col-12 ">
                                     <label for="avatarFile" class="form-label">Image:</label>
-                                    <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg"
-                                        name="datFile">
+                                    <input class="form-control" type="file" id="avatarFile"
+                                        accept=".png, .jpg, .jpeg, .WEBP" name="datFile">
                                 </div>
                                 <!-- <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="avatar preview"

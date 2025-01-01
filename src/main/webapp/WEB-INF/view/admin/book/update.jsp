@@ -48,7 +48,6 @@
                                     <form:select class="form-select" path="category">
                                         <form:option value="Sách ngoại ngữ">Sách ngoại ngữ</form:option>
                                         <form:option value="Sách IT">Sách IT</form:option>
-                                        <form:option value="Sách chuyên ngành">Sách chuyên ngành</form:option>
                                         <form:option value="Sách luyện thi">Sách luyện thi</form:option>
                                         <form:option value="Sách tiếng Hàn">Sách tiếng Hàn</form:option>
                                         <form:option value="Sách tiếng Trung">Sách tiếng Trung</form:option>
