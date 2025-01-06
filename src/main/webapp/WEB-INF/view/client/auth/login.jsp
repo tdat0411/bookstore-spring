@@ -26,10 +26,12 @@
                                             </div>
                                             <div class="card-body">
                                                 <form method="post" action="/login">
+                                                    <!-- url có error -->
                                                     <c:if test="${param.error != null}">
                                                         <div class="my-2" style="color: red;">Invalid email or
                                                             password.</div>
                                                     </c:if>
+                                                    <!-- logout thành công -->
                                                     <c:if test="${param.logout != null}">
                                                         <div class="my-2" style="color: green;">Logout success.
                                                         </div>

@@ -39,7 +39,7 @@
 		<!-- setup session -->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-core</artifactId>
+			<artifactId>spring-session-jdbc</artifactId>
 		</dependency>
 
 		<dependency>

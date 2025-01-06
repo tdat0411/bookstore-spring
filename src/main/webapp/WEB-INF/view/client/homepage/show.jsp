@@ -16,35 +16,6 @@
             </head>
 
             <body>
-                <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Book Store</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav me-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home</a>
-                                </li>
-                            </ul>
-                            <form class="d-flex align-items-center me-3">
-                                <select class="form-select me-2" id="categorySelect">
-                                    <option value="all" selected>All Categories</option>
-                                    <option value="fiction">Fiction</option>
-                                    <option value="non-fiction">Non-Fiction</option>
-                                    <option value="children">Children's Books</option>
-                                    <option value="science">Science</option>
-                                </select>
-                                <input class="form-control me-2" type="search" placeholder="Search books"
-                                    aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                            <a href="" class="btn btn-warning">Go to Cart</a>
-                        </div>
-                    </div>
-                </nav> -->
                 <div class="container">
                     <header
                         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -61,11 +32,26 @@
                             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
                         </ul>
 
-                        <div class="col-md-3 text-end">
-                            <a href="/login" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Login</a>
-                            <a href="/register" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Sign
-                                up</a>
-                        </div>
+                        <!-- người dùng chưa đăng nhập -->
+                        <c:if test="${empty pageContext.request.userPrincipal}">
+                            <div class="col-md-3 text-end">
+                                <a href="/login" class="btn btn-primary btn-lg" role="button"
+                                    aria-disabled="true">Login</a>
+                                <a href="/register" class="btn btn-primary btn-lg" role="button"
+                                    aria-disabled="true">Sign
+                                    up</a>
+                            </div>
+                        </c:if>
+
+                        <!-- người dùng đã đăng nhập -->
+                        <c:if test="${not empty pageContext.request.userPrincipal}">
+                            <div class="col-md-3 text-end">
+                                <form method="post" action="/logout">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <button class="btn btn-primary btn-lg">Logout</button>
+                                </form>
+                            </div>
+                        </c:if>
                     </header>
                 </div>
 
