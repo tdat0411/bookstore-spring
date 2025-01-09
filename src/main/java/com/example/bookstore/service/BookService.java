@@ -91,4 +91,8 @@ public class BookService {
         }
 
     }
+
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
+    }
 }

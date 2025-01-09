@@ -1,5 +1,6 @@
 package com.example.bookstore.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.bookstore.domain.Book;
+import com.example.bookstore.domain.Cart;
+import com.example.bookstore.domain.CartDetail;
+import com.example.bookstore.domain.User;
 import com.example.bookstore.service.BookService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +30,24 @@ public class ItemController {
     }
 
     @GetMapping("/cart")
-    public String getCartPage(Model model) {
+    public String getCartPage(Model model, HttpServletRequest request) {
+        User user = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        user.setId(id);
+
+        Cart cart = this.bookService.fetchByUser(user);
+
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
+
+        double totalPrice = 0;
+        for (CartDetail cartDetail : cartDetails) {
+            totalPrice += cartDetail.getPrice() * cartDetail.getQuantity();
+        }
+
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("totalPrice", totalPrice);
+
         return "client/cart/show";
     }
 
