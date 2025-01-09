@@ -34,7 +34,7 @@
                                                 alt="${book.name}" style="
                                                 height: 200px;
                                                 object-fit: cover;">
-                                            <div class="card-body d-flex flex-column">
+                                            <div class="card-body d-flex flex-column justify-content-center">
                                                 <h5 class="card-title text-center" style="
                                                     font-size: 1.2rem;
                                                     margin-bottom: 10px;">
@@ -44,10 +44,14 @@
                                                     font-size: 1.1rem;">
                                                     <fmt:formatNumber type="number" value="${book.price}" /> đ
                                                 </p>
-                                                <button class="btn btn-primary mt-auto" style="
+                                                <form action="/add-book-to-cart/${book.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}" />
+                                                    <button class="btn btn-primary mt-auto" style="
                                                     margin-top: auto;">
-                                                    Add to Cart
-                                                </button>
+                                                        Add to Cart
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
