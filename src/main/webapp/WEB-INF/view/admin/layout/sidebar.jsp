@@ -8,12 +8,6 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li>
-                    <a href="/admin/order" class="nav-link text-white">
-                        <i class="bi bi-table me-2"></i>
-                        Orders
-                    </a>
-                </li>
-                <li>
                     <a href="/admin/book" class="nav-link text-white">
                         <i class="bi bi-grid me-2"></i>
                         Books
@@ -27,5 +21,10 @@
                 </li>
             </ul>
             <hr>
-            <a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a>
+            <form method="post" action="/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <button>
+                    <i class="bi bi-box-arrow-right me-2"></i>Sign out</a>
+                </button>
+            </form>
         </div>

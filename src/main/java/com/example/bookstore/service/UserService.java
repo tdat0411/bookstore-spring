@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.bookstore.domain.Role;
 import com.example.bookstore.domain.User;
 import com.example.bookstore.domain.dto.RegisterDTO;
+import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.RoleRepository;
 import com.example.bookstore.repository.UserRepository;
 
@@ -15,10 +16,12 @@ import com.example.bookstore.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final BookRepository bookRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, BookRepository bookRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.bookRepository = bookRepository;
     }
 
     public User handleSaveUser(User user) {
@@ -55,5 +58,13 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countBooks() {
+        return this.bookRepository.count();
     }
 }

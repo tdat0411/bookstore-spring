@@ -8,10 +8,16 @@ import org.springframework.stereotype.Service;
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.Cart;
 import com.example.bookstore.domain.CartDetail;
+import com.example.bookstore.domain.Order;
+import com.example.bookstore.domain.OrderDetail;
 import com.example.bookstore.domain.User;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CartDetailRepository;
 import com.example.bookstore.repository.CartRepository;
+import com.example.bookstore.repository.OrderDetailRepository;
+import com.example.bookstore.repository.OrderRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class BookService {
@@ -19,13 +25,18 @@ public class BookService {
     private final CartRepository cartRepository;
     private final CartDetailRepository cartDetailRepository;
     private final UserService userService;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     public BookService(BookRepository bookRepository, CartRepository cartRepository,
-            CartDetailRepository cartDetailRepository, UserService userService) {
+            CartDetailRepository cartDetailRepository, UserService userService, OrderRepository orderRepository,
+            OrderDetailRepository orderDetailRepository) {
         this.bookRepository = bookRepository;
         this.cartRepository = cartRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
+        this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
     public List<Book> getAllBooks() {
@@ -95,4 +106,25 @@ public class BookService {
     public Cart fetchByUser(User user) {
         return this.cartRepository.findByUser(user);
     }
+
+    public void handleRemoveCartDetail(long cartDetailId, HttpSession session) {
+        Optional<CartDetail> cartDetailOptional = this.cartDetailRepository.findById(cartDetailId);
+        if (cartDetailOptional.isPresent()) {
+            CartDetail cartDetail = cartDetailOptional.get();
+            Cart currentCart = cartDetail.getCart();
+            // delete cart-detail
+            this.cartDetailRepository.deleteById(cartDetailId);
+
+            // update cart
+            if (currentCart.getSum() > 1) {
+                int s = (int) (currentCart.getSum() - 1);
+                currentCart.setSum(s);
+                this.cartRepository.save(currentCart);
+            } else {
+                this.cartRepository.deleteById(currentCart.getId());
+            }
+
+        }
+    }
+
 }
