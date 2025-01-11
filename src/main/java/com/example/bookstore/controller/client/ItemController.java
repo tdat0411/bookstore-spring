@@ -3,6 +3,9 @@ package com.example.bookstore.controller.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,8 +56,10 @@ public class ItemController {
 
     @GetMapping("/product")
     public String getProductPage(Model model) {
-        List<Book> listBooks = this.bookService.getAllBooks();
-        model.addAttribute("books", listBooks);
+        Pageable pageable = PageRequest.of(0, 12);
+        Page<Book> listBooks = this.bookService.getAllBooks(pageable);
+        List<Book> books = listBooks.getContent();
+        model.addAttribute("books", books);
         return "client/book/show";
     }
 

@@ -2,6 +2,9 @@ package com.example.bookstore.controller.client;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +37,10 @@ public class HomePageController {
 
     @GetMapping("/")
     public String getHomePage(Model model) {
-        List<Book> listBooks = this.bookService.getAllBooks();
-        model.addAttribute("books", listBooks);
+        Pageable pageable = PageRequest.of(0, 12);
+        Page<Book> listBooks = this.bookService.getAllBooks(pageable);
+        List<Book> books = listBooks.getContent();
+        model.addAttribute("books", books);
         return "client/homepage/show";
     }
 

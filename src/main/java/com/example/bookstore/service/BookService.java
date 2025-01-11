@@ -3,6 +3,8 @@ package com.example.bookstore.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.bookstore.domain.Book;
@@ -39,8 +41,8 @@ public class BookService {
         this.orderDetailRepository = orderDetailRepository;
     }
 
-    public List<Book> getAllBooks() {
-        return this.bookRepository.findAll();
+    public Page<Book> getAllBooks(Pageable page) {
+        return this.bookRepository.findAll(page);
     }
 
     public Optional<Book> getBookById(Long id) {

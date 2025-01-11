@@ -3,6 +3,8 @@ package com.example.bookstore.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.bookstore.domain.Role;
@@ -28,8 +30,8 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-    public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+    public Page<User> getAllUsers(Pageable page) {
+        return this.userRepository.findAll(page);
     }
 
     public Optional<User> getUserById(long id) {
