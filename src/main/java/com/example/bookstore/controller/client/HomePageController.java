@@ -21,7 +21,6 @@ import com.example.bookstore.service.UserService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class HomePageController {

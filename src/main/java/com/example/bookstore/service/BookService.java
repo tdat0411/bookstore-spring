@@ -5,19 +5,23 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.bookstore.domain.Book;
+import com.example.bookstore.domain.Book_;
 import com.example.bookstore.domain.Cart;
 import com.example.bookstore.domain.CartDetail;
 import com.example.bookstore.domain.Order;
 import com.example.bookstore.domain.OrderDetail;
 import com.example.bookstore.domain.User;
+import com.example.bookstore.domain.dto.BookCriteriaDTO;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CartDetailRepository;
 import com.example.bookstore.repository.CartRepository;
 import com.example.bookstore.repository.OrderDetailRepository;
 import com.example.bookstore.repository.OrderRepository;
+import com.example.bookstore.service.specification.BookSpecs;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -43,6 +47,63 @@ public class BookService {
 
     public Page<Book> getAllBooks(Pageable page) {
         return this.bookRepository.findAll(page);
+    }
+
+    public Page<Book> getAllBooksWithSpec(Pageable page, BookCriteriaDTO bookCriteriaDTO) {
+        if (bookCriteriaDTO.getCategory() == null
+                && bookCriteriaDTO.getPrice() == null) {
+            return this.bookRepository.findAll(page);
+        }
+        Specification<Book> combinedSpec = Specification.where(null);
+        if (bookCriteriaDTO.getCategory() != null && bookCriteriaDTO.getCategory().isPresent()) {
+            Specification<Book> currentSpecs = BookSpecs.matchListCategory(bookCriteriaDTO.getCategory().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        if (bookCriteriaDTO.getPrice() != null && bookCriteriaDTO.getPrice().isPresent()) {
+            Specification<Book> currentSpecs = this.buildPriceSpecification(bookCriteriaDTO.getPrice().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+
+        return this.bookRepository.findAll(combinedSpec, page);
+    }
+
+    public Specification<Book> buildPriceSpecification(List<String> price) {
+        Specification<Book> combinedSpec = Specification.where(null);
+
+        for (String p : price) {
+            double min = 0;
+            double max = 0;
+
+            switch (p) {
+                case "duoi-100k":
+                    min = 1;
+                    max = 100000;
+                    break;
+                case "100-300k":
+                    min = 100000;
+                    max = 300000;
+                    break;
+                case "300-600k":
+                    min = 300000;
+                    max = 600000;
+                    break;
+                case "600-900k":
+                    min = 600000;
+                    max = 900000;
+                    break;
+                case "tren-900k":
+                    min = 900000;
+                    max = 9000000;
+                    break;
+            }
+
+            if (min != 0 && max != 0) {
+                Specification<Book> rangeSpec = BookSpecs.matchMultiplePrice(min, max);
+                combinedSpec = combinedSpec.or(rangeSpec);
+            }
+        }
+
+        return combinedSpec;
     }
 
     public Optional<Book> getBookById(Long id) {
